@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💬 Speech Recognition</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="bg-gray-100 flex flex-col h-screen justify-between">
+    <nav class="flex items-center justify-center bg-red-400 p-4 shadow-lg text-2xl text-white tracking-wider">
+      <svg class="fill-current h-8 w-8 mr-2 -mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <path class="heroicon-ui"
+          d="M13 18.94V21h3a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2h3v-2.06A8 8 0 0 1 4 11a1 1 0 0 1 2 0 6 6 0 1 0 12 0 1 1 0 0 1 2 0 8 8 0 0 1-7 7.94zM12 1a4 4 0 0 1 4 4v6a4 4 0 1 1-8 0V5a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v6a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z" />
+        </svg>
+      Speech Recognition
+    </nav>
+    <main class="flex flex-col items-center justify-center">
+      <div id="info" class="text-xl text-center text-gray-600 hidden mb-4">
+        <p id="info_start">Click start button and begin speaking.</p>
+        <p id="info_speak_now">Speak now.</p>
+        <p id="info_no_speech">
+          No speech was detected. You may need to adjust your
+          <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+            microphone settings</a>.
+        </p>
+        <p id="info_no_microphone">
+          No microphone was found. Ensure that a microphone is installed and that
+          <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+            microphone settings</a> are configured correctly.</p>
+        <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
+        <p id="info_denied">Permission to use microphone was denied.</p>
+        <p id="info_blocked">Permission to use microphone is blocked. To change,
+          go to chrome://settings/contentExceptions#media-stream</p>
+        <p id="info_upgrade">Web Speech API is not supported by this browser.<br>
+          Upgrade to <a href="//www.google.com/chrome">Chrome</a>
+          version 25 or later.</p>
+      </div>
+      <div id="main" class="bg-white shadow-md rounded-lg">
+        <div class="flex p-8">
+
+          <div class="mr-8">
+            <img id="videoImg" class="video py-4 bg-gray-100" src="img/media.svg" alt="Video Placeholder">
+            <video id="videoTag" autoplay class="video hidden"></video>
+            <button id="button"
+              class="btn btn-hover btn-icon justify-center">
+              <svg id="playImg" class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM7 6l8 4-8 4V6z"/>
+              </svg>
+              <svg id="pauseImg" class="btn-svg hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path
+                  d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM7 6h2v8H7V6zm4 0h2v8h-2V6z" />
+                </svg>
+              <span class="font-bold">Start</span>
+            </button>
+          </div>
+
+          <div >
+            <img id="messageImg" class="video p-12 bg-gray-100" src="img/transcribe.svg" alt="Transcript Placeholder">
+            <div id="messageTag" class="border-red-300 border-2 rounded overflow-y-auto scrollbar mb-4 hidden" style="height: 245px; width: 374px;">
+              <div id="result" class="px-4 py-2 result">
+              </div>
+            </div>
+              <div class="flex justify-between">
+                <button id="btnClear"
+                  class="mr-4 btn btn-icon btn-disable" disabled>
+                  <svg class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path class="heroicon-ui"
+                      d="M8 6V4c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8H3a1 1 0 1 1 0-2h5zM6 8v12h12V8H6zm8-2V4h-4v2h4zm-4 4a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1z" />
+                    </svg>
+                  <span>Clear</span>
+                </button>
+                <button id="btnCopy"
+                  class="mr-4 btn btn-icon btn-disable" disabled>
+                  <svg class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path class="heroicon-ui"
+                      d="M17 7h2.25c.97 0 1.75.78 1.75 1.75v10.5c0 .97-.78 1.75-1.75 1.75H8.75C7.78 21 7 20.22 7 19.25V17H4.75C3.78 17 3 16.22 3 15.25V4.75C3 3.78 3.78 3 4.75 3h10.5c.97 0 1.75.78 1.75 1.75V7zm-2 0V5H5v10h2V8.75C7 7.78 7.78 7 8.75 7H15zM9 9v10h10V9H9z" />
+                  </svg>
+                  <span>Copy</span>
+                </button>
+                <div class="dropdown inline-block relative">
+                  <button id="btnSave" class="btn btn-icon btn-disable" disabled>
+                    <span class="mr-1">Save</span>
+                    <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </button>
+                  <ul class="dropdown-menu absolute hidden border-2 border-red-300">
+                    <li>
+                      <button id="btnSaveText" class="action-btn btn-hover btn-icon">
+                        <svg class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                          <path class="heroicon-ui"
+                            d="M6 2h9a1 1 0 0 1 .7.3l4 4a1 1 0 0 1 .3.7v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2zm9 2.41V7h2.59L15 4.41zM18 9h-3a2 2 0 0 1-2-2V4H6v16h12V9zm-2 7a1 1 0 0 1-1 1H9a1 1 0 0 1 0-2h6a1 1 0 0 1 1 1zm0-4a1 1 0 0 1-1 1H9a1 1 0 0 1 0-2h6a1 1 0 0 1 1 1zm-5-4a1 1 0 0 1-1 1H9a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1z" />
+                        </svg>
+                        <span>Text</span>
+                      </button>
+                    </li>
+                    <li>
+                      <button id="btnSaveAudio" class="action-btn btn-hover btn-icon">
+                        <svg class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                          <path d="M5 7H1v6h4l5 5V2L5 7zm11.36 9.36l-1.41-1.41a6.98 6.98 0 0 0 0-9.9l1.41-1.41a8.97 8.97 0 0 1 0 12.72zm-2.82-2.82l-1.42-1.42a3 3 0 0 0 0-4.24l1.42-1.42a4.98 4.98 0 0 1 0 7.08z"/>
+                        </svg>
+                        <span>Audio</span>
+                      </button>
+                    </li>
+                    <li>
+                      <button id="btnSaveVideo" class="action-btn btn-hover btn-icon">
+                        <svg class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                          <path d="M0 4c0-1.1.9-2 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm6 0v12h8V4H6zM2 5v2h2V5H2zm0 4v2h2V9H2zm0 4v2h2v-2H2zm14-8v2h2V5h-2zm0 4v2h2V9h-2zm0 4v2h2v-2h-2zM8 7l5 3-5 3V7z"/>
+                        </svg>
+                        <span>Video</span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <footer class="h-12 bg-gray-300 text-center text-gray-600 border-gray-400 border-t-2 pt-2">
+      Built with 🎙 Web Speech API
+    </footer>
+  </body>
+  <script src="js/app.js"></script>
+</html>
