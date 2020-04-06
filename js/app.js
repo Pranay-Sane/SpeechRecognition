@@ -80,7 +80,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const startVideo = () => {
     navigator.getUserMedia({
       audio: {
-        echoCancellation: { exact: true }
+        echoCancellation: { exact: false }
       },
       video: {
         mandatory: {
