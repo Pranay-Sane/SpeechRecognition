@@ -36,9 +36,25 @@
           version 25 or later.</p>
       </div>
       <div id="main" class="bg-white shadow-md rounded-lg">
+        <div class="block md:hidden">
+          <ul id="tabs" class="flex border-b px-8 pt-5 -mb-3">
+            <li class="tab-default tab-selected">
+              <a id="btn-camera" class="tab tab-active btn-icon" href="#">
+                <svg class="btn-svg"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 6c0-1.1.9-2 2-2h3l2-2h6l2 2h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6zm10 10a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0-2a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                <span>Camera</span>
+              </a>
+            </li>
+            <li class="tab-default">
+              <a id="btn-transcript" class="tab tab-inactive btn-icon" href="#">
+                <svg class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-4 4v-4H2a2 2 0 0 1-2-2V3c0-1.1.9-2 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-8zM5 7v2h2V7H5zm4 0v2h2V7H9zm4 0v2h2V7h-2z"/></svg>
+                <span>Transcript</span>
+              </a>
+            </li>
+          </ul>
+        </div>
         <div class="flex p-8">
 
-          <div class="mr-8">
+          <div id="camera">
             <img id="videoImg" class="video py-4 bg-gray-100" src="img/media.svg" alt="Video Placeholder">
             <video id="videoTag" autoplay class="video hidden"></video>
             <button id="button"
@@ -54,7 +70,7 @@
             </button>
           </div>
 
-          <div >
+          <div id="transcript" class="md:ml-8 hidden md:block" >
             <img id="messageImg" class="video p-12 bg-gray-100" src="img/transcribe.svg" alt="Transcript Placeholder">
             <div id="messageTag" class="border-red-300 border-2 rounded overflow-y-auto scrollbar mb-4 hidden" style="height: 245px; width: 374px;">
               <div id="result" class="px-4 py-2 result">
