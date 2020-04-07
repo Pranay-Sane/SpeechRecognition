@@ -200,7 +200,13 @@ window.addEventListener('DOMContentLoaded', () => {
     el.style = { position: 'absolute', left: '-9999px' };
     document.body.appendChild(el);
     el.select();
-    document.execCommand('copy');
+    if (document.execCommand('copy')) {
+      btnCopy.classList.add('copied');
+      const temp = setInterval(() => {
+        btnCopy.classList.remove('copied');
+        clearInterval(temp);
+      }, 600);
+    }
     document.body.removeChild(el);
   }, false);
 

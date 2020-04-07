@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>💬 Speech Recognition</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css?v=20200407.001" />
   </head>
   <body class="bg-gray-100 flex flex-col h-screen justify-between">
     <nav class="flex items-center justify-center bg-red-400 p-4 shadow-lg text-2xl text-white tracking-wider">
@@ -56,7 +56,7 @@
 
           <div id="camera">
             <img id="videoImg" class="video py-4 bg-gray-100" src="img/media.svg" alt="Video Placeholder">
-            <video id="videoTag" autoplay class="video hidden"></video>
+            <video id="videoTag" autoplay muted class="video hidden"></video>
             <button id="button"
               class="btn btn-hover btn-icon justify-center">
               <svg id="playImg" class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -86,21 +86,21 @@
                   <span>Clear</span>
                 </button>
                 <button id="btnCopy"
-                  class="mr-4 btn btn-icon btn-disable" disabled>
+                  class="mr-4 btn btn-icon btn-disable relative" disabled>
                   <svg class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                     <path class="heroicon-ui"
                       d="M17 7h2.25c.97 0 1.75.78 1.75 1.75v10.5c0 .97-.78 1.75-1.75 1.75H8.75C7.78 21 7 20.22 7 19.25V17H4.75C3.78 17 3 16.22 3 15.25V4.75C3 3.78 3.78 3 4.75 3h10.5c.97 0 1.75.78 1.75 1.75V7zm-2 0V5H5v10h2V8.75C7 7.78 7.78 7 8.75 7H15zM9 9v10h10V9H9z" />
                   </svg>
-                  <span>Copy</span>
+                  <span>Copy<span class="done" aria-hidden="true">Copied</span></span>
                 </button>
                 <div class="dropdown inline-block relative">
                   <button id="btnSave" class="btn btn-icon btn-disable" disabled>
-                    <span class="mr-1">Save</span>
-                    <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    <svg class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <path d="M10.707 7.05L10 6.343 4.343 12l1.414 1.414L10 9.172l4.243 4.242L15.657 12z" />
                     </svg>
+                    <span class="-ml-1">Save</span>
                   </button>
-                  <ul class="dropdown-menu absolute hidden border-2 border-red-300">
+                  <ul class="dropdown-menu absolute hidden border-2 border-red-300 shadow">
                     <li>
                       <button id="btnSaveText" class="action-btn btn-hover btn-icon">
                         <svg class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -139,5 +139,5 @@
       Built with 🎙 Web Speech API
     </footer>
   </body>
-  <script src="js/app.js"></script>
+  <script src="js/app.js?v=20200407.001"></script>
 </html>
